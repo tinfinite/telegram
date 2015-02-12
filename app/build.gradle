@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
@@ -77,82 +77,13 @@ android {
             cFlags "-DANDROID_NDK " +
                     "-DDISABLE_IMPORTGL " +
                     "-w -std=gnu99 -O3 -fno-strict-aliasing -fprefetch-loop-arrays " +
-                    "-DNULL=0 -DSOCKLEN_T=socklen_t -DLOCALE_NOT_USED -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 "+
+                    "-DNULL=0 -DSOCKLEN_T=socklen_t -DLOCALE_NOT_USED -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 " +
                     "-Drestrict='' -D__EMX__ -DOPUS_BUILD -DFIXED_POINT -DUSE_ALLOCA -DHAVE_LRINT -DHAVE_LRINTF -fno-math-errno "
-                    "-DAVOID_TABLES " +
+            "-DAVOID_TABLES " +
                     "-DANDROID_TILE_BASED_DECODE " +
                     "-DANDROID_ARMV6_IDCT"
             ldLibs "log", "jnigraphics", "m"
             stl "stlport_static"
-        }
-    }
-
-    productFlavors {
-        common {
-        }
-        hockey {
-        }
-        hockeytest {
-            packageName 'org.telegram.android.debug'
-        }
-        dctest {
-            packageName 'org.telegram.android.debug'
-        }
-        beta {
-            packageName 'org.telegram.android.beta'
-        }
-        dev {
-            packageName 'org.telegram.android.dev'
-        }
-    }
-
-    sourceSets {
-        main {
-            res.srcDirs = ['src/main/res']
-            assets.srcDirs = ['src/main/assets']
-            java.srcDirs = ['src/main/java']
-        }
-
-        common {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/main/res-main']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-production/java', 'src/keys-prime/java', 'src/res-common/java', 'src/build-release/java']
-            manifest.srcFile 'src/main/res-main/AndroidManifest.xml'
-        }
-
-        hockey {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/main/res-main']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-production/java', 'src/keys-prime/java', 'src/res-common/java', 'src/build-test/java']
-            manifest.srcFile 'src/main/res-main/AndroidManifest.xml'
-        }
-
-        hockeytest {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/dc-test/res', 'src/main/res-debug']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-test/java', 'src/keys-prime/java', 'src/res-common/java', 'src/build-dctest/java']
-            manifest.srcFile 'src/main/res-debug/AndroidManifest.xml'
-        }
-
-        dev {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/main/res-dev']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-production/java', 'src/keys-prime/java', 'src/res-common/java', 'src/build-release/java']
-            manifest.srcFile 'src/main/res-dev/AndroidManifest.xml'
-        }
-
-        beta {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/main/res-beta']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-production/java', 'src/keys-beta/java', 'src/res-common/java', 'src/build-release/java']
-            manifest.srcFile 'src/main/res-beta/AndroidManifest.xml'
-        }
-
-        dctest {
-            res.srcDirs = ['src/res-mdpi/res', 'src/res-hdpi/res', 'src/res-xhdpi/res', 'src/res-xxhdpi/res', 'src/dc-test/res', 'src/main/res-debug']
-            assets.srcDirs = ['src/res-common/assets']
-            java.srcDirs = ['src/dc-test/java', 'src/keys-prime/java', 'src/res-common/java', 'src/build-test/java']
-            manifest.srcFile 'src/main/res-debug/AndroidManifest.xml'
         }
     }
 }
